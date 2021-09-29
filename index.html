@@ -101,6 +101,21 @@
 
         function style_Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1_0(feature) {
             switch(String(feature.properties['AVAILABLE_STATE'])) {
+                default:
+                    return {
+                pane: 'pane_Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(178,217,224,1.0)',
+                interactive: true,
+            }
+                    break;
                 case 'AVAILABLE':
                     return {
                 pane: 'pane_Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1',
@@ -146,21 +161,6 @@
                 interactive: true,
             }
                     break;
-                default:
-                    return {
-                pane: 'pane_Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(178,217,224,1.0)',
-                interactive: true,
-            }
-                    break;
             }
         }
         map.createPane('pane_Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1');
@@ -192,7 +192,8 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['AVAILABLESTATE'] !== null ? autolinker.link(feature.properties['AVAILABLESTATE'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">AVAILABLESTATE</th>\
+                        <td>' + (feature.properties['AVAILABLESTATE'] !== null ? autolinker.link(feature.properties['AVAILABLESTATE'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['unit'] !== null ? autolinker.link(feature.properties['unit'].toLocaleString()) : '') + '</td>\
@@ -250,7 +251,7 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(178,217,224,1.0)',
+                fillColor: 'rgba(142,142,142,1.0)',
                 interactive: true,
             }
                     break;
@@ -266,7 +267,7 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(104,221,118,1.0)',
+                fillColor: 'rgba(218,199,29,1.0)',
                 interactive: true,
             }
                     break;
@@ -291,9 +292,8 @@
             },
         });
         bounds_group.addLayer(layer_availableAvailable_Points_2);
-        map.addLayer(layer_availableAvailable_Points_2);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'available Available_Points<br /><table><tr><td style="text-align: center;"><img src="legend/availableAvailable_Points_2_AVAILABLE0.png" /></td><td>AVAILABLE</td></tr><tr><td style="text-align: center;"><img src="legend/availableAvailable_Points_2_NOTAVAILABLE1.png" /></td><td>NOT AVAILABLE</td></tr><tr><td style="text-align: center;"><img src="legend/availableAvailable_Points_2_UNKNOWNSTATE2.png" /></td><td>UNKNOWN STATE</td></tr><tr><td style="text-align: center;"><img src="legend/availableAvailable_Points_2_3.png" /></td><td></td></tr></table>': layer_availableAvailable_Points_2,'Parcel_Boundary_Area_With_AvailabilityStates Parcel_Boundary_Area<br /><table><tr><td style="text-align: center;"><img src="legend/Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1_AVAILABLE0.png" /></td><td>AVAILABLE</td></tr><tr><td style="text-align: center;"><img src="legend/Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1_NOTAVAILABLE1.png" /></td><td>NOT AVAILABLE</td></tr><tr><td style="text-align: center;"><img src="legend/Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1_UNKNOWNSTATE2.png" /></td><td>UNKNOWN STATE</td></tr><tr><td style="text-align: center;"><img src="legend/Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1_3.png" /></td><td></td></tr></table>': layer_Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1,"OpenStreetMap": layer_OpenStreetMap_0,}).addTo(map);
+        L.control.layers(baseMaps,{'available Available_Points<br /><table><tr><td style="text-align: center;"><img src="legend/availableAvailable_Points_2_AVAILABLE0.png" /></td><td>AVAILABLE</td></tr><tr><td style="text-align: center;"><img src="legend/availableAvailable_Points_2_NOTAVAILABLE1.png" /></td><td>NOT AVAILABLE</td></tr><tr><td style="text-align: center;"><img src="legend/availableAvailable_Points_2_UNKNOWNSTATE2.png" /></td><td>UNKNOWN STATE</td></tr><tr><td style="text-align: center;"><img src="legend/availableAvailable_Points_2_3.png" /></td><td></td></tr></table>': layer_availableAvailable_Points_2,'Parcel_Boundary_Area_With_AvailabilityStates Parcel_Boundary_Area<br /><table><tr><td style="text-align: center;"><img src="legend/Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1_NotLinkedtoParcelLookatAvailablePointsLayer0.png" /></td><td>Not Linked to Parcel (Look at Available Points Layer)</td></tr><tr><td style="text-align: center;"><img src="legend/Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1_TingAvailable1.png" /></td><td>Ting Available</td></tr><tr><td style="text-align: center;"><img src="legend/Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1_TingNotAvailable2.png" /></td><td>Ting Not Available</td></tr><tr><td style="text-align: center;"><img src="legend/Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1_UnknownifAvailable3.png" /></td><td>Unknown if Available</td></tr></table>': layer_Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1,"OpenStreetMap": layer_OpenStreetMap_0,}).addTo(map);
         setBounds();
         </script>
     </body>
