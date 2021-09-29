@@ -12,6 +12,9 @@ Ting offers Fiber Internet to some residents of Charlottesville, Va. They do not
 	* [GeoJSON Files](GISData/GeoJSON)
 * The raw data used to build the GIS map data is provided in [CSV form](https://github.com/benfrye/TingMappingProject/tree/main/GISData/RawCSVs)
 
+#### Usage
+At the time of scraping I couldn't find any information limiting usage of Ting's tool or the data that it provides. As such I am providing this information freely to those that want to use it. In the event that I am asked to make it private, I will consider doing so, but make no promises of maintaining or removing access to the data in the future. Use with that information in mind.
+
 ### Methodology
 _**Note:**_ The data in this repository was scraped using Ting's [online availability checker](https://ting.com/internet/town/charlottesville) as a source. The scrape began on **September 26, 2021** and ran until **September 29, 2021**. _**Therefore, the data only accurately describes the state of Ting's availability as they claimed it to be during that time.**_
 
@@ -59,14 +62,13 @@ _[geoJSONParser.py](GISData/Scripts/geoJSONParser.py)_
 4. This is then combined and written out to [available.geojson](GISData/GeoJSON/available.geojson)
 
 _[parcelParser.py](GISData/Scripts/parcelParser.py)_
-5. This script loads the [Real Estate (Base Data)](GISData/RawCSVs/Real_Estate_%28Base_Data%29.csv) data from the OpenData portal into a list of parcel GPID's.
-6. Then the script loads the [rawScraped.csv](GISData/RawCSVs/rawScraped.csv) data
-7. It then loops through each scraped data and matches the address that was used to scrape the Ting tool with the parcel GPID from the Real Estate (Base Data) file.
-8.  This is then combined and written out to [addressesMappedToParcelGPID.csv](GISData/RawCSVs/addressesMappedToParcelGPID.csv)
+1. This script loads the [Real Estate (Base Data)](GISData/RawCSVs/Real_Estate_%28Base_Data%29.csv) data from the OpenData portal into a list of parcel GPID's.
+2. Then the script loads the [rawScraped.csv](GISData/RawCSVs/rawScraped.csv) data
+3. It then loops through each scraped data and matches the address that was used to scrape the Ting tool with the parcel GPID from the Real Estate (Base Data) file.
+4.  This is then combined and written out to [addressesMappedToParcelGPID.csv](GISData/RawCSVs/addressesMappedToParcelGPID.csv)
 
 _[geoJSONParcelParser.py](GISData/Scripts/geoJSONParcelParser.py)_
 1. This script loads the `addressesMappedToParcelGPID.csv` file generated from the previous `parcelParser.py` script into memory.
 2. Then it  loads the [Parcel Boundary Area](GISData/GeoJSON/Parcel_Boundary_Area.geojson) data from the OpenData portal to build a list of parcel areas using Lat/Lon data of each segment of the parcel for each address in the city.
 4. It then loops through each address in the `addressesMappedToParcelGPID.csv` and matches the GPID associated with each address with the parcel information from the Parcel Boundary Area data.
 5.  This is then combined and written out to [Parcel_Boundary_Area_With_AvailabilityStates.geojson](GISData/GeoJSON/Parcel_Boundary_Area_With_AvailabilityStates.geojson)
-
