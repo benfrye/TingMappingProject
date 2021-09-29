@@ -131,7 +131,7 @@ class TingBot():
 
 
 def processAddresses():
-    # try:
+    try:
         addressReader = MasterAddressReader()
         locations = addressReader.read()
 
@@ -140,8 +140,8 @@ def processAddresses():
         bot.checkLocations(locations)
         bot.close()
         return True
-    # except:
-    #     return False
+    except:
+        return False
 
 succeeded = False
 failedCount = -1
