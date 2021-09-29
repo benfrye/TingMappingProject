@@ -8,6 +8,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         html, body, #map {
@@ -31,6 +32,7 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-measure.js"></script>
         <script src="data/Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1.js"></script>
         <script src="data/availableAvailable_Points_2.js"></script>
@@ -196,10 +198,12 @@
                         <td>' + (feature.properties['AVAILABLESTATE'] !== null ? autolinker.link(feature.properties['AVAILABLESTATE'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['unit'] !== null ? autolinker.link(feature.properties['unit'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">unit</th>\
+                        <td>' + (feature.properties['unit'] !== null ? autolinker.link(feature.properties['unit'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['address'] !== null ? autolinker.link(feature.properties['address'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">address</th>\
+                        <td>' + (feature.properties['address'] !== null ? autolinker.link(feature.properties['address'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -267,7 +271,7 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(218,199,29,1.0)',
+                fillColor: 'rgba(178,217,224,1.0)',
                 interactive: true,
             }
                     break;
@@ -292,6 +296,16 @@
             },
         });
         bounds_group.addLayer(layer_availableAvailable_Points_2);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
         var baseMaps = {};
         L.control.layers(baseMaps,{'available Available_Points<br /><table><tr><td style="text-align: center;"><img src="legend/availableAvailable_Points_2_AVAILABLE0.png" /></td><td>AVAILABLE</td></tr><tr><td style="text-align: center;"><img src="legend/availableAvailable_Points_2_NOTAVAILABLE1.png" /></td><td>NOT AVAILABLE</td></tr><tr><td style="text-align: center;"><img src="legend/availableAvailable_Points_2_UNKNOWNSTATE2.png" /></td><td>UNKNOWN STATE</td></tr><tr><td style="text-align: center;"><img src="legend/availableAvailable_Points_2_3.png" /></td><td></td></tr></table>': layer_availableAvailable_Points_2,'Parcel_Boundary_Area_With_AvailabilityStates Parcel_Boundary_Area<br /><table><tr><td style="text-align: center;"><img src="legend/Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1_NotLinkedtoParcelLookatAvailablePointsLayer0.png" /></td><td>Not Linked to Parcel (Look at Available Points Layer)</td></tr><tr><td style="text-align: center;"><img src="legend/Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1_TingAvailable1.png" /></td><td>Ting Available</td></tr><tr><td style="text-align: center;"><img src="legend/Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1_TingNotAvailable2.png" /></td><td>Ting Not Available</td></tr><tr><td style="text-align: center;"><img src="legend/Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1_UnknownifAvailable3.png" /></td><td>Unknown if Available</td></tr></table>': layer_Parcel_Boundary_Area_With_AvailabilityStatesParcel_Boundary_Area_1,"OpenStreetMap": layer_OpenStreetMap_0,}).addTo(map);
         setBounds();
